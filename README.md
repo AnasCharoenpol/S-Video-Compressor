@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗜 S-Video Compressor
 
-## Getting Started
+> Smart, client-side video compression without the technical jargon. Just set your target size and let the algorithm do the heavy lifting!
 
-First, run the development server:
+## 🎥 Video Preview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*(Insert demo video link or animated GIF here showcasing the drag-and-drop interface, the animated 3D card tilt, and final optimization metrics!)* 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Short Info
+**S-Video Compressor** was born out of a desire for a minimalist, "it just works" video scaling tool. Instead of tweaking complex bitrates or codec profiles, you simply specify exactly how large you want your file to be (e.g., "10MB"), and the app recursively optimizes the file securely within your own browser—meaning no video ever leaves your local device. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
+- **Auto-Target Brain:** Calculates required bitrates dynamically based on the target file size mathematically via the formula: `Bitrate = (TargetSize * 8) / Duration`.
+- **Recursive Safety Loop:** Automatically re-encodes (always iterating from the original source file to preserve quality) in reduced increments until the specific boundary constraint is met perfectly.
+- **Client-Side WASM Engine:** Powered entirely in-browser using WebAssembly. Total privacy, high deployment velocity, and zero backend uploading/downloading required.
+- **Micro-Animations & Parallax:** Fluid glassmorphism UI utilizing `framer-motion` spring physics to track mouse cursor depth and movement gracefully for an Apple TV-style card tilt.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Technologies
+- **Framework:** Next.js 15 (App Router, TypeScript)
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **Core Processing:** `ffmpeg.wasm` (`@ffmpeg/ffmpeg`)
+- **Icons:** Lucide React
 
-## Learn More
+## 🔄 The Process
+The development process started by focusing entirely on the underlying math. Setting up a reliable FFmpeg layer passing multi-threaded commands via `SharedArrayBuffer` boundaries is complex. This engine was abstracted away into a custom `useCompressor` React hook that continuously compares resultant bytes against the user target, restarting the pass at `95%` bitrate reduction increments until the strict target requirement is fulfilled. Only after the core loop proved bulletproof were the actual sleek, dark-mode styling and interactive mouse-tracking components bridged over it using Framer Motion capabilities. 
 
-To learn more about Next.js, take a look at the following resources:
+## 🧠 What I Learned
+- **WebAssembly (WASM):** Deeply interfacing with heavy C ports like FFmpeg in the browser context highlighted the strict memory and execution limitations of JavaScript runtime environments.
+- **Security Headers & Cross-Origin Isolation:** Managing `COOP/COEP` headers (Cross-Origin Opener Policy & Embedder Policy) natively inside Next.js config just to authorize `SharedArrayBuffer` privileges safely.
+- **React Spring Physics:** Managing smooth interface micro-interactions tied to browser pointer events natively (`useMotionValue` & `useSpring`) rather than relying on arbitrary, rigid CSS transition keyframes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌱 Overall Growth
+This project represented a significant leap in understanding how "thick-client architecture" can function without a backend server logic loop. Handling these intensive video streaming algorithms offline entirely via the client empowers building more resilient, deeply private applications that drastically alleviate database and computational costs. It simultaneously solidified my mastery of complex React Hooks controlling async Wasm operations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Future Improvements
+- Add support for batch-processing multiple videos in an asynchronous queue.
+- Implement granular override toggles for power-users who *do* want to explicitly change codecs (like HEVC / H.265 compression).
+- Hardware acceleration detection to offload processing to the client's localized GPU when available via the WebCodecs API instead of purely WASM CPU-bound routines.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with passion.*
