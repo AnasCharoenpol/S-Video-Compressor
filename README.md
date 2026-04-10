@@ -2,9 +2,9 @@
 
 > Smart, client-side video compression without the technical jargon. Just set your target size and let the algorithm do the heavy lifting!
 
-## 🎥 Video Preview
+## 🎥 Preview
 
-*(Insert demo video link or animated GIF here showcasing the drag-and-drop interface, the animated 3D card tilt, and final optimization metrics!)* 
+<img width="2560" height="1327" alt="Screenshot 2569-04-10 at 16 51 28" src="https://github.com/user-attachments/assets/f43ea6d0-f3e1-4f54-b7d8-0bede6f6c03e" />
 
 ## 📝 Short Info
 **S-Video Compressor** was born out of a desire for a minimalist, "it just works" video scaling tool. Instead of tweaking complex bitrates or codec profiles, you simply specify exactly how large you want your file to be (e.g., "10MB"), and the app recursively optimizes the file securely within your own browser—meaning no video ever leaves your local device. 
